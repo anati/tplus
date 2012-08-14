@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+	<name>Headquarter Images Gallery</name>
+	<author>Agape Red</author>
+	<creationDate>February 2012</creationDate>
+	<copyright></copyright>
+	<license></license>
+	<authorEmail></authorEmail>
+	<authorUrl></authorUrl>
+	<version>1.0</version>
+	<description>The headquarters image gallery display a small gallery of Talent Plus headquarter images.</description>
+	<files>
+		<filename module="mod_headquarters_gallery">mod_headquarters_gallery.php</filename>
+	</files>
+	<params>
+		<param name="image_dir" type="text" default="0" label="Image Directory" size="40" description="This is the location where the headquarter images are located." />
+	</params>
+</install>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd">
+<install type="component" version="1.5.0" method="upgrade">
+	<name>EasyDiscuss</name>
+	<creationDate>12/02/2011</creationDate>
+	<author>Stack Ideas</author>
+	<authorEmail>support@stackideas.com</authorEmail>
+	<authorUrl>http://www.stackideas.com</authorUrl>
+	<copyright>Copyright 2009 - 2011 Stack Ideas. All rights reserved</copyright>
+	<license>GPL License</license>
+	<version>2.0.3537</version>
+	<description>
+		Discussion extension for your Joomla! site.
+	</description>
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8">uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+	<installfile>install.easydiscuss.php</installfile>
+	<uninstallfile>uninstall.easydiscuss.php</uninstallfile>
+	<files folder="site">
+		<folder>assets</folder>
+		<folder>classes</folder>
+		<folder>controllers</folder>
+		<folder>helpers</folder>
+		<folder>models</folder>
+		<folder>sef_ext</folder>
+		<folder>themes</folder>
+		<folder>views</folder>			
+		<file>constants.php</file>
+		<file>COPYRIGHT.PHP</file>
+		<file>router.php</file>
+		<file>easydiscuss.php</file>
+		<file>index.html</file>
+		<file>jomsocial_rule.xml</file>
+		<file>badwords_list.txt</file>
+		<file>views.php</file>
+	</files>	
+	<administration>
+		<menu link="option=com_easydiscuss" img="components/com_easydiscuss/assets/images/easydiscuss-favicon.png">EasyDiscuss</menu>
+		<submenu>
+            <menu view="settings" img="components/com_easydiscuss/assets/images/settings-favicon.png">COM_EASYDISCUSS_MENU_SETTINGS</menu>
+			<menu view="categories" img="components/com_easydiscuss/assets/images/categories-favicon.png">COM_EASYDISCUSS_MENU_CATEGORIES</menu>
+			<menu view="posts" img="components/com_easydiscuss/assets/images/discussions-favicon.png">COM_EASYDISCUSS_MENU_DISCUSSIONS</menu>
+            <menu view="tags" img="components/com_easydiscuss/assets/images/tags-favicon.png">COM_EASYDISCUSS_MENU_TAGS</menu>
+			<menu view="users" img="components/com_easydiscuss/assets/images/users-favicon.png">COM_EASYDISCUSS_MENU_USERS</menu>
+			<menu view="acls" img="components/com_easydiscuss/assets/images/acl-favicon.png">COM_EASYDISCUSS_MENU_ACL</menu>
+			<menu view="reports" img="components/com_easydiscuss/assets/images/reports-favicon.png">COM_EASYDISCUSS_MENU_REPORTS</menu>
+			<menu view="subscription" img="components/com_easydiscuss/assets/images/subscription-favicon.png">COM_EASYDISCUSS_MENU_SUBSCRIPTION</menu>
+			<menu view="badges" img="components/com_easydiscuss/assets/images/badges-favicon.png">COM_EASYDISCUSS_MENU_BADGES</menu>
+			<menu view="ranks" img="components/com_easydiscuss/assets/images/ranks-favicon.png">COM_EASYDISCUSS_MENU_RANKING</menu>
+		</submenu>
+		<files folder="admin">
+			<folder>assets</folder>
+			<folder>controllers</folder>
+			<folder>models</folder>
+			<folder>tables</folder>
+			<folder>views</folder>			
+			<folder>elements</folder>
+			<file>admin.easydiscuss.php</file>
+			<file>configuration.ini</file>
+			<file>install.default.php</file>
+			<file>install.mysql.utf8.sql</file>
+			<file>toolbar.easydiscuss.php</file>
+			<file>uninstall.mysql.utf8.sql</file>
+			<file>views.php</file>
+		</files>
+		<languages>
+			<language tag="en-GB">languages/admin/en-GB.com_easydiscuss.ini</language>
+			<language tag="en-GB">languages/admin/en-GB.com_easydiscuss.menu.ini</language>
+			<language tag="da-DK">languages/admin/da-DK.com_easydiscuss.ini</language>
+			<language tag="da-DK">languages/admin/da-DK.com_easydiscuss.menu.ini</language>
+			<language tag="sv-SE">languages/admin/sv-SE.com_easydiscuss.ini</language>
+			<language tag="sv-SE">languages/admin/sv-SE.com_easydiscuss.menu.ini</language>			
+		</languages>
+	</administration>
+	<languages>
+		<language tag="en-GB">languages/site/en-GB.com_easydiscuss.ini</language>
+		<language tag="da-DK">languages/site/da-DK.com_easydiscuss.ini</language>
+		<language tag="sv-SE">languages/site/sv-SE.com_easydiscuss.ini</language>
+	</languages>
+</install>

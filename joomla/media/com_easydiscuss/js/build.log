@@ -1,0 +1,30 @@
+Build time: Mon Jan 09 2012 14:56:45 GMT+0000 (MPST)
+
+uglifyjs -nc -v -o easydiscuss.controllers.mentions.js dev/easydiscuss.controllers.mentions.js
+DEBUG: // parse: 0.002 sec.
+DEBUG: // mangle: 0.002 sec.
+DEBUG: // squeeze: 0.006 sec.
+DEBUG: // generate: 0.002 sec.
+DEBUG: // split: 0.001 sec.
+
+uglifyjs -nc -v -o easydiscuss.controllers.tagform.js dev/easydiscuss.controllers.tagform.js
+DEBUG: // parse: 0.003 sec.
+DEBUG: // mangle: 0.002 sec.
+DEBUG: // squeeze: 0.006 sec.
+DEBUG: // generate: 0.002 sec.
+DEBUG: // split: 0.003 sec.
+
+uglifyjs -nc -v -o easydiscuss.discuss.js dev/easydiscuss.discuss.js
+DEBUG: // parse: 0.357 sec.
+DEBUG: // mangle: 0.012 sec.
+DEBUG: // squeeze: 0.086 sec.
+DEBUG: // generate: 0.012 sec.
+DEBUG: // split: 0.025 sec.
+
+uglifyjs -nc -v -o easydiscuss.disjax.js dev/easydiscuss.disjax.js
+DEBUG: // parse: 0.007 sec.
+DEBUG: // mangle: 0.004 sec.
+DEBUG: // squeeze: 0.025 sec.
+DEBUG: // generate: 0.003 sec.
+DEBUG: // split: 0.005 sec.
+

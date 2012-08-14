@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<install version="1.5" type="plugin" group="user">
+    <name>Eloqua Contact Push</name>
+    <author>Agape Red</author>
+    <creationDate>April 2012</creationDate>
+    <copyright></copyright>
+    <license>GNU/GPL</license>
+    <authorEmail>dave@agapered.com</authorEmail>
+    <authorUrl>http://agapered.com</authorUrl>
+    <version>1.0</version>
+    <description>The Eloqua Contact Push plugin sends registration data to the Eloqua API when users register on the Joomla site.</description>
+    <files>
+        <filename plugin="eloquacontactpushusers">eloquacontactpushusers.php</filename>
+        <filename plugin="eloqua.client.soap1.2.php/EloquaBObj.php">eloqua.client.soap1.2.php/EloquaBObj.php</filename>
+        <filename plugin="eloqua.client.soap1.2.php/EloquaSOAPClient.php">eloqua.client.soap1.2.php/EloquaSOAPClient.php</filename>
+        <filename plugin="eloqua.client.soap1.2.php/wsdl/EloquaServiceV1.2.wsdl">eloqua.client.soap1.2.php/wsdl/EloquaServiceV1.2.wsdl</filename>
+    </files>
+    <params>
+        <param name="username" type="text" size="30" default="" label="Eloqua Username" description="The Eloqua username to be associated with the API."/>
+        <param name="password" type="password" size="30" default="" label="Eloqua Password" description="The password for the Eloqua API account."/>
+        <param name="endpoint" type="text" size="30" default="https://secure.eloqua.com/API/1.2/Service.svc?wsdl" label="Eloqua API Endpoint" description="The API Endpoint URL for Eloqua."/>
+    </params>
+</install>

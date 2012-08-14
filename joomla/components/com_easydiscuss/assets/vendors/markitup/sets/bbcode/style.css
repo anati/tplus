@@ -1,0 +1,59 @@
+/* -------------------------------------------------------------------
+// markItUp!
+// By Jay Salvat - http://markitup.jaysalvat.com/
+// ------------------------------------------------------------------*/
+
+/**
+ * @package		EasyDiscuss
+ * @copyright	Copyright (C) 2010 Stack Ideas Private Limited. All rights reserved.
+ * @license		GNU/GPL, see LICENSE.php
+ *
+ * EasyDiscuss is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
+
+.markItUp .markItUpButton1 a{background-image:url(images/fugue/edit-bold.png)}
+.markItUp .markItUpButton2 a{background-image:url(images/fugue/edit-italic.png)}
+.markItUp .markItUpButton3 a{background-image:url(images/fugue/edit-underline.png)}
+.markItUp .markItUpButton4 a{background-image:url(images/picture.png)}
+.markItUp .markItUpButton5 a{background-image:url(images/video.png)}
+.markItUp .markItUpButton6 a{background-image:url(images/fugue/edit-list.png)}
+.markItUp .markItUpButton7 a{background-image:url(images/fugue/edit-list-order.png)}
+.markItUp .markItUpButton8 a{background-image:url(images/list-item.png)}
+.markItUp .markItUpButton9 a{background-image:url(images/quotes.png)}
+.markItUp .markItUpButton10 a{background-image:url(images/code.png)}
+
+
+/* smiley */
+.markItUp .markItUpButton11 a{background-image:url(images/emoticon-happy.png)}
+.markItUp .markItUpButton12 a{background-image:url(images/emoticon-smile.png)}
+.markItUp .markItUpButton13 a{background-image:url(images/emoticon-surprised.png)}
+.markItUp .markItUpButton14 a{background-image:url(images/emoticon-tongue.png)}
+.markItUp .markItUpButton15 a{background-image:url(images/emoticon-unhappy.png)}
+.markItUp .markItUpButton16 a{background-image:url(images/emoticon-wink.png)}
+.markItUp .clean a{background-image:url(images/clean.png)}
+.markItUp .preview a{background-image:url(images/preview.png)}
+
+/* Joomla 1.6 */
+#discuss-wrapper .markItUp .markItUpButton1 a:hover{background:url(images/fugue/edit-bold.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton2 a:hover{background:url(images/fugue/edit-italic.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton3 a:hover{background:url(images/fugue/edit-underline.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton4 a:hover{background:url(images/picture.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton5 a:hover{background:url(images/video.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton6 a:hover{background:url(images/fugue/edit-list.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton7 a:hover{background:url(images/fugue/edit-list-order.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton8 a:hover{background:url(images/list-item.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton9 a:hover{background:url(images/quotes.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton10 a:hover{background:url(images/code.png) center no-repeat #eee}
+
+#discuss-wrapper .markItUp .markItUpButton11 a:hover{background:url(images/emoticon-happy.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton12 a:hover{background:url(images/emoticon-smile.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton13 a:hover{background:url(images/emoticon-surprised.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton14 a:hover{background:url(images/emoticon-tongue.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton15 a:hover{background:url(images/emoticon-unhappy.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .markItUpButton16 a:hover{background:url(images/emoticon-wink.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .clean a:hover{background:url(images/clean.png) center no-repeat #eee}
+#discuss-wrapper .markItUp .preview a:hover{background:url(images/preview.png) center no-repeat #eee}

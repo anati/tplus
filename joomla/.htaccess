@@ -1,0 +1,1154 @@
+##
+# @version $Id: htaccess.txt 14401 2010-01-26 14:10:00Z louis $
+# @package Joomla
+# @copyright Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
+# @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+# Joomla! is Free Software
+##
+
+
+#####################################################
+#  READ THIS COMPLETELY IF YOU CHOOSE TO USE THIS FILE
+#
+# The line just below this section: 'Options +FollowSymLinks' may cause problems
+# with some server configurations.  It is required for use of mod_rewrite, but may already
+# be set by your server administrator in a way that dissallows changing it in
+# your .htaccess file.  If using it causes your server to error out, comment it out (add # to
+# beginning of line), reload your site in your browser and test your sef url's.  If they work,
+# it has been set by your server administrator and you do not need it set here.
+#
+#####################################################
+
+##  Can be commented out if causes errors, see notes above.
+Options +FollowSymLinks
+
+#
+#  mod_rewrite in use
+
+RewriteEngine On
+
+
+
+
+
+
+########## Begin - Rewrite rules to block out some common exploits
+## If you experience problems on your site block out the operations listed below
+## This attempts to block the most common type of exploit `attempts` to Joomla!
+#
+## Deny access to extension xml files (uncomment out to activate)
+#<Files ~ "\.xml$">
+#Order allow,deny
+#Deny from all
+#Satisfy all
+#</Files>
+## End of deny access to extension xml files
+RewriteCond %{QUERY_STRING} mosConfig_[a-zA-Z_]{1,21}(=|\%3D) [OR]
+# Block out any script trying to base64_encode crap to send via URL
+RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [OR]
+# Block out any script that includes a <script> tag in URL
+RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+# Block out any script trying to set a PHP GLOBALS variable via URL
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+# Block out any script trying to modify a _REQUEST variable via URL
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+# Send all blocked request to homepage with 403 Forbidden error!
+RewriteRule ^(.*)$ index.php [F,L]
+#
+########## End - Rewrite rules to block out some common exploits
+
+#  Uncomment following line if your webserver's URL
+#  is not directly related to physical file paths.
+#  Update Your Joomla! Directory (just / for root)
+
+# RewriteBase /
+#######################################################
+# Custom Redirects
+# Ticket #60
+# /healthcare goes to the solutions/healthcare page 
+RewriteRule ^healthcare /index.php?option=com_content&view=article&id=310&Itemid=105 [NC,PT]
+
+# Gracefully degrade historic URLs
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=107
+RewriteRule ^(.*)$ /talent-plus/cottage-and-manor-lincoln-nebr-usa/cottage-and-manor-lincoln-nebr-usa? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=179
+RewriteRule ^(.*)$ /healthcare? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=122
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=311 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=105
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=54 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=110
+RewriteRule ^(.*)$ /N/A? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=103
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=52 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=109
+RewriteRule ^(.*)$ /N/A? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=111
+RewriteRule ^(.*)$ /N/A? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=142
+RewriteRule ^(.*)$ /news-room/facts? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=155
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=296 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=163
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=313 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=128
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=318 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=166
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=161 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=3
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=165 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=172
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=117
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=104
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=116
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=125
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=120
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=118
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=114
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=145
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=146
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=119
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=124
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=115
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=102
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=178
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=160
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=162
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=177
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=123
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=175
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=176
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=171
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=96
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=174
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=173
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=149
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/talent_plus.php$
+RewriteCond %{QUERY_STRING} page_id=156
+RewriteRule ^(.*)$ /talent-plus/cottage-and-manor-lincoln-nebr-usa/cottage-and-manor-lincoln-nebr-usa? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=2
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=309 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=5
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=258 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=6
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=259 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=19
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=87 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=12
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=105 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=9
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=107 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=18
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=108 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=7
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=110 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=3
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=316 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=8
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=142 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=11
+ # Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=157 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/books? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=13
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=303 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=4
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=177 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=14
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=179 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=16
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=184 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=20
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=191 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=17
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=383 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=21
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=277 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/books? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=10
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=205 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/bookItem.php$
+RewriteCond %{QUERY_STRING} item_id=15
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=215 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=77
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=312 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=53
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=257 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=82
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=260 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=67
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=261 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=94
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=262 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=72
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=263 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=48
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=93 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=52
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=94 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=66
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=96 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=40
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=97 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=55
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=98 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=49
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=99 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=25
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=100 [R=301,L]
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=20
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=101 [R=301,L]
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=19
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=314 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=112
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=104 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=87
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=112 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=9
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=116 [R=301,L]
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=78
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=117 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=22
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=119 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=6
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=120 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=99
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=121 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=88
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=122 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=13
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=126 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=21
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=128 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=69
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=129 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=47
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=132 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=109
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=134 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=96
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=136 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=45
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=140 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=65
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=146 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=91
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=252 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=10
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=154 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=7
+ # Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=155 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=56
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=156 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=12
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=158 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=30
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=159 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=59
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=162 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=114
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=163 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=26
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=164 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=29
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=166 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=2
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=167 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=37
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=170 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=97
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=171 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=110
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=172 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=84
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=173 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=113
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=175 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=93
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=181 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=95
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=182 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=111
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=183 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=83
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=252 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=51
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=187 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=80
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=188 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=98
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=189 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=102
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=190 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=43
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=192 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=100
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=194 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=16
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=196 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=68
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=199 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=36
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=201 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=81
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=203 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=58
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=204 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=31
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=207 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=39
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=208 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=85
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=211 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=104
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=212 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=74
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=214 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=61
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=217 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=70
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=219 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=108
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=224 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=103
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=225 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=101
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=226 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=107
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=230 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=92
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=231 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=106
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=232 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=46
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=233 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=89
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=234 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=5
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=235 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=90
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=236 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=24
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=237 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=105
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=238 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=115
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=239 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=86
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=245 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=4
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=246 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=73
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=247 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=64
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=248 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=54
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=249 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=75
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=250 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=3
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=251 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=79
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=252 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=63
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=253 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=17
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=254 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=57
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=255 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=60
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=256 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=71
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/articleItem.php$
+RewriteCond %{QUERY_STRING} item_id=33
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=154
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=273 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=150
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=265 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=136
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=266 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=23
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=267 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=37
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=268 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=112
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=269 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=20
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=270 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=133
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=271 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=15
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=272 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=73
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=273 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=31
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=274 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=126
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=275 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=132
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=276 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=152
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=277 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=116
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=278 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=122
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=279 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=146
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=280 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=41
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=281 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=65
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=282 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=129
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=283 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=140
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=302 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=114
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=285 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=147
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=286 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=66
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=287 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=99
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=288 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=145
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=301 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=56
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=290 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=100
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=291 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=144
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=292 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=130
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=293 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=151
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=294 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=127
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=295 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=149
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=296 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=134
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=301 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=153
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=298 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=118
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=299 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=143
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=300 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=148
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=301 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=108
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=302 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=92
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=86 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=105
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=88 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=107
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=242 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=98
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=90 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=117
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=91 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=102
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=92 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=97
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=103 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=142
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=103 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=139
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=106 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=138
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=315 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=135
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=111 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=131
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=113 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=22
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=114 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=87
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=115 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=110
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=118 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=50
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=123 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=69
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=124 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=49
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=125 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=52
+# Unpublished article
+# RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=317 [R=301,L] 
+RewriteRule ^(.*)$ /news-room/articles? [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=74
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=130 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=68
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=131 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=86
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=133 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=64
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=135 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=75
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=137 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=33
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=138 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=67
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=139 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=63
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=141 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=19
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=143 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=125
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=144 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=82
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=319 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=83
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=147 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=141
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=148 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=60
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=149 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=28
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=150 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=79
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=151 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=109
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=152 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=88
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=160 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=47
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=168 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=155
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=169 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=115
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=174 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=76
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=176 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=71
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=178 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=54
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=180 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=29
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=185 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=91
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=193 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=25
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=195 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=59
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=197 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=95
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=198 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=45
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=200 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=90
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=206 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=85
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=209 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=80
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=210 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=55
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=213 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=36
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=216 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=61
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=218 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=70
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=220 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=72
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=221 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=123
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=222 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=89
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=223 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=120
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=227 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=128
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=228 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=101
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=229 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=121
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=240 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=78
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=241 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=106
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=242 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=57
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=243 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=39
+RewriteRule ^(.*)$ /index.php?option=com_content&view=article&id=244 [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} ..
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=58
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=119
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/news_item.php$
+RewriteCond %{QUERY_STRING} item_id=113
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/solutions.php$
+RewriteCond %{QUERY_STRING} page_id=164
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/solutions.php$
+RewriteCond %{QUERY_STRING} page_id=175
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/downloadAndRec.php$
+RewriteCond %{QUERY_STRING} uri=TalentOnline0709.pdf
+RewriteRule ^(.*)$ /? [R=301,L]
+RewriteCond %{REQUEST_URI} ^/International.php$
+RewriteCond %{QUERY_STRING} page_id=174
+RewriteRule ^(.*)$ /? [R=301,L]
+redirect 301 /talent_advantage.php /index.php?option=com_content&view=article&id=69
+redirect 301 /privacy.php /index.php?option=com_content&view=article&id=70
+redirect 301 /bookList.php /index.php?option=com_content&view=article&id=303
+redirect 301 /contact.php /contact-us
+redirect 301 /articleList.php /news-room/articles
+redirect 301 /media.php /news-room
+redirect 301 /bios_kimberly_rath.php /talent-plus/heritage/56
+redirect 301 /talent_plus.php /talent-plus/who-we-are
+redirect 301 /who-we-are /talent-plus/who-we-are
+redirect 301 /solutions.php /solutions
+redirect 301 /bios_doug_rath.php /talent-plus/heritage/55
+redirect 301 /careers.php /contact-us/careers
+redirect 301 /talent-plus/careers /contact-us/careers
+redirect 301 /home.swf /userfiles/videos/home.swf
+redirect 301 /virtual-tour.swf /userfiles/videos/virtual-tour.swf
+redirect 301 /TalPlus_videos_meehan_v1.swf /userfiles/videos/TalPlus_videos_meehan_v1.swf
+redirect 301 /TalPlus_videos_homepage_v2.swf /userfiles/videos/TalPlus_videos_homepage_v2.swf
+redirect 301 /TalPlus_videos_cnbc_v1.swf /userfiles/videos/TalPlus_videos_cnbc_v1.swf
+redirect 301 /newsfade.swf /userfiles/videos/newsfade.swf
+redirect 301 /TalPlus_videos_homepage_v3.swf /userfiles/videos/TalPlus_videos_homepage_v3.swf
+redirect 301 /news_room.php /news-room
+redirect 301 /podcast_feed.php /news-room/podcasts
+redirect 301 /docs/Page_14.pdf /userfiles/pdf/Page_14.pdf
+redirect 301 /docs/HFWBH.pdf /userfiles/pdf/HFWBH.pdf
+redirect 301 /userfiles/BringingOutTheBest.pdf /userfiles/pdf/BringingOutTheBest.pdf
+redirect 301 /docs/32_HIRING.pdf /userfiles/pdf/32_HIRING.pdf
+redirect 301 /userfiles/ProfessionalAssociatePositionPaper1108.pdf /userfiles/pdf/ProfessionalAssociatePositionPaper1108.pdf
+redirect 301 /docs/MBJArticle.pdf /userfiles/pdf/MBJArticle.pdf
+redirect 301 /docs/UCLA.pdf /userfiles/pdf/UCLA.pdf
+redirect 301 /docs/PequenasyMedianasEmpresas.pdf /userfiles/pdf/PequenasyMedianasEmpresas.pdf
+redirect 301 /docs/ANTIOQUIATAKE3.pdf /userfiles/pdf/ANTIOQUIATAKE3.pdf
+redirect 301 /docs/HRM9.12_assessment_centres_(feature).pdf /userfiles/pdf/HRM9.12_assessment_centres_(feature).pdf
+redirect 301 /docs/Strategic_HR_Forum.pdf /userfiles/pdf/Strategic_HR_Forum.pdf
+redirect 301 /docs/62LeadershipPerformance-HealthCare.pdf /userfiles/pdf/62LeadershipPerformance-HealthCare.pdf
+redirect 301 /docs/16-ArticuloTalentPlus.pdf /userfiles/pdf/16-ArticuloTalentPlus.pdf
+redirect 301 /docs/enfoque_seminarios_catalogo_expo_talento.pdf /userfiles/pdf/enfoque_seminarios_catalogo_expo_talento.pdf
+redirect 301 /docs/TalentOnline-HealthCareClinical0111.pdf /userfiles/pdf/TalentOnline-HealthCareClinical0111.pdf
+redirect 301 /userfiles/file/79_Leadership_Coaching_Talent_Speaks_1173.pdf /userfiles/pdf/79_Leadership_Coaching_Talent_Speaks_1173.pdf
+redirect 301 /docs/TalentPlus-Saludybienestar-2.pdf /userfiles/pdf/TalentPlus-Saludybienestar-2.pdf
+redirect 301 /docs/TalentOnline-HealthCareNon-Clinical0111.pdf /userfiles/pdf/TalentOnline-HealthCareNon-Clinical0111.pdf
+redirect 301 /docs/TalentPlus-Monday-MorningTalentScout.pdf /userfiles/pdf/TalentPlus-Monday-MorningTalentScout.pdf
+redirect 301 /docs/articulo-talent-plus.pdf /userfiles/pdf/articulo-talent-plus.pdf
+redirect 301 "/userfiles/Order Form.pdf" "/userfiles/pdf/Order Form.pdf"
+redirect 301 /docs/81RaisingtheBarforTalentinHealthCareTalentSpeaks.pdf /userfiles/pdf/81RaisingtheBarforTalentinHealthCareTalentSpeaks.pdf
+redirect 301 /docs/UndercoverBoss1110.pdf /userfiles/pdf/UndercoverBoss1110.pdf
+redirect 301 /docs/MBJ_Article-Berry.pdf /userfiles/pdf/MBJ_Article-Berry.pdf
+redirect 301 /docs/McClurg_Article.pdf /userfiles/pdf/McClurg_Article.pdf
+redirect 301 /docs/TalentPlus040610.pdf /userfiles/pdf/TalentPlus040610.pdf
+redirect 301 /userfiles/LDERESCOLOMBIANOS.pdf /userfiles/pdf/LDERESCOLOMBIANOS.pdf
+redirect 301 /docs/5-TalentPlus-3.pdf /userfiles/pdf/5-TalentPlus-3.pdf
+redirect 301 /userfiles/file/19_Reduced_Turnover_-_Retail_9586.pdf /userfiles/pdf/19_Reduced_Turnover_-_Retail_9586.pdf
+redirect 301 /userfiles/file/55_Profit_of_Retention_-_Hospitality_2510.pdf /userfiles/pdf/55_Profit_of_Retention_-_Hospitality_2510.pdf
+redirect 301 /userfiles/file/11_Employee_Retention_and_Turnover_-_Retail_2067.pdf /userfiles/pdf/11_Employee_Retention_and_Turnover_-_Retail_2067.pdf
+redirect 301 /userfiles/file/17_Sales_Productivity_-_Hospitality_1440.pdf /userfiles/pdf/17_Sales_Productivity_-_Hospitality_1440.pdf
+redirect 301 /userfiles/file/13_New_Hire_Retention_and_Turnover_-_Financial_1674.pdf /userfiles/pdf/13_New_Hire_Retention_and_Turnover_-_Financial_1674.pdf
+redirect 301 "/userfiles/file/Fit for the Ritz.pdf" "/userfiles/pdf/Fit for the Ritz.pdf"
+redirect 301 "/userfiles/file/Best Practices for Recruiting and Retaining Talent - Ed Eynon.pdf" "/userfiles/pdf/Best Practices for Recruiting and Retaining Talent - Ed Eynon.pdf"
+redirect 301 "/userfiles/file/Lincoln Plating L Mag.pdf" "/userfiles/pdf/Lincoln Plating L Mag.pdf"
+redirect 301 "/userfiles/file/New Frontiers in Talent Management.pdf" "/userfiles/pdf/New Frontiers in Talent Management.pdf"
+redirect 301 /userfiles/file/14_Employee_Performance_-_Health_Care_1973.pdf /userfiles/pdf/14_Employee_Performance_-_Health_Care_1973.pdf
+redirect 301 /userfiles/file/TheScienceofTalent.pdf /userfiles/pdf/TheScienceofTalent.pdf
+redirect 301 /docs/Talent-plus-Hidroc-2-corregido.pdf /userfiles/pdf/Talent-plus-Hidroc-2-corregido.pdf
+redirect 301 /userfiles/file/28_Sales_Productivity_-_Automotive_1898.pdf /userfiles/pdf/28_Sales_Productivity_-_Automotive_1898.pdf
+redirect 301 /docs/Luxury_Institute-Wealth_Report-11-15-09_TalentPlus.pdf /userfiles/pdf/Luxury_Institute-Wealth_Report-11-15-09_TalentPlus.pdf
+redirect 301 /userfiles/file/talad_auto_increasesales_1708.pdf /userfiles/pdf/talad_auto_increasesales_1708.pdf
+redirect 301 /userfiles/LI-WealthReport-10-15-09.pdf /userfiles/pdf/LI-WealthReport-10-15-09.pdf
+redirect 301 /userfiles/file/18_Succession_Planning_-_Hospitality_1972.pdf /userfiles/pdf/18_Succession_Planning_-_Hospitality_1972.pdf
+redirect 301 "/userfiles/file/A Quality Interview.pdf" "/userfiles/pdf/A Quality Interview.pdf"
+redirect 301 /userfiles/file/thepeak_0107.pdf /userfiles/pdf/thepeak_0107.pdf
+redirect 301 "/userfiles/file/Talent Plus_MBJ.pdf" "/userfiles/pdf/Talent Plus_MBJ.pdf"
+redirect 301 "/userfiles/file/HR Innovator_Hire Standards.pdf" "/userfiles/pdf/HR Innovator_Hire Standards.pdf"
+redirect 301 /docs/TALEN_PLUS.DougRath.pdf /userfiles/pdf/TALEN_PLUS.DougRath.pdf
+redirect 301 "/userfiles/file/TalentPlus_HR Management_8_5x11.pdf" "/userfiles/pdf/TalentPlus_HR Management_8_5x11.pdf"
+redirect 301 /userfiles/file/West_Paces_TalentExpo_Bogota_Columbia_May_2011_-_Ryan_Magnon_1256.pptx /userfiles/powerpoint/West_Paces_TalentExpo_Bogota_Columbia_May_2011_-_Ryan_Magnon_1256.pptx
+redirect 301 "/userfiles/file/Building Your Brand on Talented People.pdf" "/userfiles/pdf/Building Your Brand on Talented People.pdf"
+redirect 301 /userfiles/file/12_Sales_Productivity_-_Construction_Mngt._1873.pdf /userfiles/pdf/12_Sales_Productivity_-_Construction_Mngt._1873.pdf
+redirect 301 "/userfiles/And Now for Something CompletelyDifferent.pdf" "/userfiles/pdf/And Now for Something CompletelyDifferent.pdf"
+redirect 301 "/userfiles/The Ritz-Carlton Mystique.pdf" "/userfiles/pdf/The Ritz-Carlton Mystique.pdf"
+redirect 301 "/userfiles/file/michelli ritz carlton case study .pdf" "/userfiles/pdf/michelli ritz carlton case study .pdf"
+redirect 301 "/userfiles/file/Mercedes Benz Autohaus.pdf" "/userfiles/pdf/Mercedes Benz Autohaus.pdf"
+redirect 301 "/userfiles/file/Pyramids Are Tombs.pdf" "/userfiles/pdf/Pyramids Are Tombs.pdf"
+redirect 301 "/userfiles/file/Ladies and Gentleman, At Your Service.pdf" "/userfiles/pdf/Ladies and Gentleman, At Your Service.pdf"
+redirect 301 "/userfiles/file/54_55 Profit of Retention - Ritz-Carlton(1).pdf" "/userfiles/pdf/54_55 Profit of Retention - Ritz-Carlton(1).pdf"
+redirect 301 "/userfiles/file/New Frontiers in Talent Management - Doug Rath.pdf" "/userfiles/pdf/New Frontiers in Talent Management - Doug Rath.pdf"
+redirect 301 "/userfiles/file/Best Practices for Recruiting and Retaining Talent - Ed Eynon(1).pdf" "/userfiles/pdf/Best Practices for Recruiting and Retaining Talent - Ed Eynon(1).pdf"
+redirect 301 "/files/ExpoTalento2011/ExpoTalento - Tatiana Ferreira.pdf" "/userfiles/pdf/ExpoTalento - Tatiana Ferreira.pdf"
+redirect 301 "/public/ExpoTalento/Susan/Fellows Powerpoint 0410.ppt" "/userfiles/powerpoint/Fellows Powerpoint 0410.ppt"
+redirect 301 "/files/ExpoTalento2011/West Paces TalentExpo Bogota Columbia May 2011 - Ryan Magnon.pdf" "/userfiles/pdf/West Paces TalentExpo Bogota Columbia May 2011 - Ryan Magnon.pdf"
+redirect 301 /files/ExpoTalento2011/GVG_HFWBH.pdf /userfiles/pdf/GVG_HFWBH.pdf
+redirect 301 "/public/ExpoTalento/Larry/ROI of Talent 0410.ppt" "/userfiles/powerpoint/ROI of Talent 0410.ppt"
+redirect 301 "/public/ExpoTalento/Steve Marx/Expotalento 2010 - Steve Marx.pptx" "/userfiles/powerpoint/Expotalento 2010 - Steve Marx.pptx"
+redirect 301 "/public/ExpoTalento/Dan Baker/Happiness and Human Potential - Dan Baker 0410.ppt" "/userfiles/powerpoint/Happiness and Human Potential - Dan Baker 0410.ppt"
+redirect 301 /bios_sandy_maxwell.php /
+redirect 301 /SteelExternalPlaySeekMute.swf /
+redirect 301 /podcast.php /
+redirect 301 /bios_brad_black.php /
+redirect 301 /webinars/futuresizing/ /
+redirect 301 /docs/HCMSampleInterview1008.pdf /
+redirect 301 /docs/ExecutiveSampleInterviewNP0409.pdf /
+redirect 301 /docs/HCSSampleInterview1008.pdf /
+redirect 301 /docs/In-DepthPhysicianSampleInterview0111.pdf /
+redirect 301 /userfiles/file/FutureSizing.pdf /
+redirect 301 /userfiles/file/69_Hospital_Opening_Talent_Speaks_1214.pdf /
+redirect 301 /docs/are_you_happy.pps /
+redirect 301 /docs/talent_plus_learning_academy_calendar_of_events_2010.pdf /
+redirect 301 /userfiles/HowHappyAreYou-Greenberg.pdf /
+redirect 301 /userfiles/valm_sloganspecs.pdf /
+redirect 301 /userfiles/HappyClimate-Greenberg.pdf /
+redirect 301 "/userfiles/Podcast Questions.pdf" "/"
+redirect 301 /mantisbt/lost_pwd_page.php /
+redirect 301 /mantisbt/login_page.php /
+redirect 301 /userfiles/file/talad_fin_newhire_8629.pdf /
+redirect 301 /userfiles/flash/home.swf /
+redirect 301 /userfiles/talent_advantage/tapl_advantageLeads.doc /
+redirect 301 /userfiles/talent_advantage/talad_hc_perform.pdf /
+redirect 301 /userfiles/talent_advantage/talad_hos_prod.pdf /
+redirect 301 /userfiles/talent_advantage/talad_hos_succ.pdf /
+redirect 301 "/userfiles/file/a matter of talent.pdf" "/"
+redirect 301 "/userfiles/file/Summit Agenda.pdf" "/"
+redirect 301 /userfiles/file/talad_conmad_sales_6429.pdf /
+redirect 301 /pptpdf/ /
+redirect 301 /files/ExpoTalento2011/ /
+redirect 301 /pptpdf/macro.txt /
+redirect 301 /pptpdf/ppt2007_save_as_pdf.pdf /
+redirect 301 /pptpdf/control_ppt2003_converstion.pdf /
+redirect 301 /pptpdf/ppt2007_print_to_adobe_pdf.pdf /
+redirect 301 /pptpdf/ppt2003.ppt /
+redirect 301 "/files/ExpoTalento2011/Chip_Conley_Joie de Vivre.pdf" "/"
+redirect 301 /mail_password.php /
+redirect 301 /forms/ASHRRA2011NetworkingPowerHourRegistration /
+redirect 301 "/Estee Lauder BioViewSM.swf" "/"
+redirect 301 /talentbank-support/ /
+redirect 301 "/public/ExpoTalento/Jim Bagnola/PHBkeynote3_10.ppt" "/"
+#######################################################
+
+##########
+# Other redirects
+redirect 301 /sitemap.php /index.php?option=com_xmap&sitemap=1
+redirect 301 "/userfiles/Order Form.pdf" "/userfiles/pdf/Order Form.pdf"
+RewriteCond %{REQUEST_URI} ^/page.php$
+RewriteCond %{QUERY_STRING} page_id=126
+RewriteRule ^(.*)$ /results? [R=301,L]
+
+
+########## Begin - Joomla! core SEF Section
+#
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/index.php
+RewriteCond %{REQUEST_URI} (/|\.php|\.html|\.htm|\.feed|\.pdf|\.raw|/[^.]*)$  [NC]
+RewriteRule (.*) index.php
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+#
+########## End - Joomla! core SEF Section
+

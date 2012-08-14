@@ -1,0 +1,54 @@
+/* -------------------------------------------------------------------
+// markItUp! Universal MarkUp Engine, JQuery plugin
+// By Jay Salvat - http://markitup.jaysalvat.com/
+// ------------------------------------------------------------------*/
+
+/**
+ * @package		EasyDiscuss
+ * @copyright	Copyright (C) 2010 Stack Ideas Private Limited. All rights reserved.
+ * @license		GNU/GPL, see LICENSE.php
+ *  
+ * EasyDiscuss is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
+.markItUp a{color:#000;text-decoration:none}
+.markItUpEditor{background:#fff;border:1px solid #ccc;clear:none;display:block;font:12px/18px 'Lucida Grande',Tahoma,Verdana;height:100px;overflow:auto;width:100%;margin:0;padding:4px !important;color:#555;}
+.markItUpPreviewFrame{background-color:#fff;height:300px;overflow:auto;width:99.9%;margin:5px 0}
+.markItUpFooter{background:url(images/si_btn.png) 0 -1px repeat-x #eee;border:1px solid #ccc;border-top:0;width:100%;padding:3px 4px !important}
+.markItUpResizeHandle{background:url(images/handle.png) center no-repeat;cursor:n-resize;height:6px;margin-left:auto;display:block}
+
+/* first row of buttons */
+body .markItUp *{margin:0;outline:0}
+body .markItUpContainer{margin-right:10px}
+body .markItUpHeader{display:inline-block;width:100%;padding:4px;background:#f5f5f5;border:1px solid #ccc;border-bottom:0;}
+body .markItUpHeader ul{padding:0;display:inline-block;}
+body .markItUpHeader ul li{background:none;float:left;list-style:none;margin:0 2px 0 0;padding:0;position:relative}
+body .markItUpHeader ul li a:hover{border-color:#ddd;}
+body #discuss-wrapper .markItUp *{margin:0;outline:0}
+body #discuss-wrapper .markItUpContainer{margin-right:10px}
+body #discuss-wrapper .markItUpHeader{display:inline-block;width:100%;padding:4px;background:#f5f5f5;border:1px solid #ccc;border-bottom:0;}
+body #discuss-wrapper .markItUpHeader ul{padding:0;display:inline-block;}
+body #discuss-wrapper .markItUpHeader ul li{background:none;float:left;list-style:none;margin:0 2px 0 0;padding:0;position:relative}
+body #discuss-wrapper .markItUpHeader ul li a:hover{border-color:#ddd;}
+
+.markItUpHeader ul li:hover > ul{display:block}
+.markItUpHeader ul .markItUpDropMenu{background:transparent url(images/menu.png) no-repeat 115% 50%;margin-right:5px}
+.markItUpHeader ul .markItUpDropMenu li{margin-right:0}
+/* next rows of buttons */
+.markItUpHeader ul ul{background:#FFF;border:1px solid #000;display:none;left:0;position:absolute;top:18px}
+.markItUpHeader ul ul li{border-bottom:1px solid #000;float:none}
+.markItUpHeader ul ul .markItUpDropMenu{background:#FFF url(images/submenu.png) no-repeat 100% 50%}
+.markItUpHeader ul .markItUpSeparator{background-color:#fff;height:16px;margin:0 2px;overflow:hidden;width:1px}
+.markItUpHeader ul ul .markItUpSeparator{height:1px;margin:0;width:auto}
+/* next rows of buttons */
+.markItUpHeader ul ul ul{left:150px;position:absolute;top:-1px}
+.markItUpHeader ul ul ul li{float:none}
+.markItUpHeader ul a{background-position:center;background-repeat:no-repeat;border:solid 1px #f5f5f5;display:block;height:16px;margin:0;padding:3px;text-indent:-10000px;width:16px;
+	border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.markItUpHeader ul ul a{background-position:2px 50%;display:block;padding:5px 5px 5px 25px;text-indent:0;width:120px}
+.markItUpHeader ul ul a:hover{background-color:#000;color:#FFF}
+/* seperators */
+body #discuss-wrapper .markItUpSeparator{width:1px;display:block;text-indent:-99999px}

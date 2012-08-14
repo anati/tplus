@@ -1,0 +1,53 @@
+/*
+ * The css here allows the default left side-menu
+ * to display in accordance with the template.
+ */
+#left-sidemenu, #left-sidemenu li
+{
+    list-style-type: none;
+    width: 172px;
+    margin-top: 0px;
+}
+#nav
+{
+    padding: 0px !important;
+    margin-top: -17px;
+}
+.menu-left-sidemenu-item, ul.menu-left-sidemenu-item ul
+{
+    padding-left: 0px;
+}
+li#current, li.active, #left-sidemenu li.parent ul li
+{
+    display: block !important;
+}
+#left-sidemenu > li, #left-sidemenu > li > a
+{
+    display: none;
+}
+#left-sidemenu a
+{
+    color: #666;
+}
+#left-sidemenu li > ul > li.active > a, #left-sidemenu li#current > a
+{
+    color: #69C !important;
+}
+#left-sidemenu ul > li
+{
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    text-decoration: none;
+}
+#left-sidemenu ul > li > ul > li
+{
+    margin-left: 12px;
+}
+#left-sidemenu ul > li > ul > li
+{
+    border: 0px !important;
+}
+#left-sidemenu a
+{
+    margin-left: 8px !important;
+}

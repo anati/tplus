@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+	<name>TPJoomla Side Menu</name>
+	<author></author>
+	<creationDate></creationDate>
+	<copyright></copyright>
+	<license></license>
+	<authorEmail></authorEmail>
+	<authorUrl></authorUrl>
+	<version>1.0</version>
+	<description>A sidebar menu for the TalentPlus Joomla site.</description>
+	<files>
+		<filename module="mod_tpjoomla_sidemenu">mod_tpjoomla_sidemenu.php</filename>
+	</files>
+	<params>
+	</params>
+</install>

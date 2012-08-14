@@ -1,0 +1,102 @@
+li.maximenuCK
+{
+    width: 16%;
+}
+div#maximenuCK span.titreCK, div#maximenuCK span.titreCK:hover
+{
+    color: #000000 !important;
+    font-size: 12px !important;
+    padding: 3px 0px 0px !important;
+}
+li.level0 a.maximenuCK
+{
+    width: 100% !important;
+    text-align: center;
+    height: 34px;
+    position: relative;
+    font-size: 12px !important;
+}
+#topnav
+{
+    height: 34px;
+}
+a.maximenuCK span.titreCK
+{
+    display: block !important;
+    line-height: 25px !important;
+}
+a.maximenuCK span.titreCK.titleOverflow
+{
+    display: block !important;
+    line-height: 15px !important;
+}
+/* span.titreCK:hover */
+li.level1 a.maximenuCK:hover
+{
+    background-color: #F0F0F0 !important;
+}
+ul.maximenuCK2, li.maximenuCK
+{
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+}
+div.floatCK,div#maximenuCK ul.maximenuCK2 li.maximenuCK
+{
+    width: 240px !important;
+}
+/*
+ul.maximenuCK2 li.maximenuCK a.maximenuCK
+{
+    background-color: #fbfbfb !important;
+}
+ul.maximenuCK2 li.maximenuCK a.maximenuCK:hover
+{
+    background-color: #f0f0f0 !important;
+}
+.maximenuCK,.floatCK
+{
+    border-color:#eaeaea !important;
+}
+div.floatck
+{
+    background-color: #fff !important;
+}
+*/
+.level0 div.floatCK
+{
+    margin-left: -10px !important;
+}
+.level1 div.floatCK
+{
+    margin-left: 240px !important;
+}
+.level2 div.floatCK
+{
+    margin-left: 480px !important;
+}
+.level3 div.floatCK
+{
+    margin-left: 720px !important;
+}
+.level4 div.floatCK
+{
+    margin-left: 960px !important;
+}
+.level5 div.floatCK
+{
+    margin-left: 720px !important;
+}
+.level1 div.floatCK , .level2 div.floatCK , .level3 div.floatCK , .level4 div.floatCK , .level5 div.floatCK , .level6 div.floatCK
+{
+    /* This number should correlate to the padding-top of the li.levelX a.maximenuCK class above */
+    margin-top: -45px !important;
+}
+li.level1 a.maximenuCK, li.level2 a.maximenuCK, li.level3 a.maximenuCK, li.level4 a.maximenuCK, li.level5 a.maximenuCK, li.level6 a.maximenuCK, li.level7 a.maximenuCK, li.level8 a.maximenuCK, li.level9 a.maximenuCK, li.level10 a.maximenuCK, li.level11 a.maximenuCK, li.level12 a.maximenuCK, li.level13 a.maximenuCK, li.level14 a.maximenuCK, li.level15 a.maximenuCK
+{
+    padding-top: 5px !important;
+}
+/* Allow the top menu to display above the banner slider. */
+.floatCK, #topnav
+{
+    z-index: 1000 !important;
+}

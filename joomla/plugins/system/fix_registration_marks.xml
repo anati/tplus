@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="system">
+	<name>Fix Registration Marks</name>
+	<author>Agape Red</author>
+	<creationDate>2012</creationDate>
+	<copyright></copyright>
+	<license></license>
+	<authorEmail></authorEmail>
+	<authorUrl></authorUrl>
+	<version>1.0</version>
+	<description>Fix registration marks.</description>
+	<files>
+		<filename plugin="fix_registration_marks">fix_registration_marks.php</filename>
+	</files>
+	<params/>
+</install>

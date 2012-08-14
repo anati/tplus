@@ -1,0 +1,37 @@
+/* IE7-specific */
+#left-sidemenu
+{
+    margin-left: -45px;
+    width: 250px;
+}
+#left-sidemenu li > ul > li > ul 
+{
+    margin-left: 0px;
+}
+#nav li
+{
+    padding-left: 3px !important;
+}
+ul.maximenuCK > li:hover .floatCK
+{
+    display: block;
+    top: 34px;
+    left: auto;
+}
+.floatCK .floatCK
+{
+    top: 44px !important;
+}
+li
+{
+    background-repeat: no-repeat !important;
+}
+.moduletable-newsflash table tr td p
+{
+    padding-bottom: 8px;
+}
+.homepage-welcome-video
+{
+    margin-left: -40px;
+}
+/* End of IE7-specific rules */
