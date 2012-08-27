@@ -574,3 +574,7 @@ padding:0;
     margin: 0px !important;
     line-height: 18px;
 }
+/* ReCAPTCHA */
+#recaptcha_table{
+    width: 445px;
+}
